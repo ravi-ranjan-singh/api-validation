@@ -1,7 +1,16 @@
-import express from 'express'
+import express from "express";
+import getAllPostController from "./controllers/getAllPostController";
+import getSinglePostController from "./controllers/getSinglePostController";
+import createPostController from "./controllers/createPostController";
+import updatePostController from "./controllers/updatePostController";
 
-const app = express()
+const app = express();
 
-const PORT = 3000
+app.get("/posts", getAllPostController);
+app.get("/posts/:id", getSinglePostController);
+app.post("/posts", createPostController);
+app.patch("/posts/:id", updatePostController);
 
-app.listen(PORT,()=>console.log(`Server is running at ${PORT}`))
+const PORT = 3000;
+
+app.listen(PORT, () => console.log(`Server is running at ${PORT}`));
