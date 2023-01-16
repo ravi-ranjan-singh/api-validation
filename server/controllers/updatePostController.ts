@@ -2,12 +2,15 @@ import { Request, Response } from "express";
 import db from "../db";
 
 const updatePostController = async (req: Request, res: Response) => {
-  const data = req.body;
+  const postData = req.body;
+  console.log(req.body);
   const id = req.params.id;
+  console.log(id);
+  console.log(postData);
   try {
-    const response = await db.updatePost(id, data);
+    const { data } = await db.updatePost(id, postData);
     return res.status(200).json({
-      data: response,
+      data,
     });
   } catch (error) {
     console.error(error);

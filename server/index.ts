@@ -6,6 +6,8 @@ import updatePostController from "./controllers/updatePostController";
 
 const app = express();
 
+app.use(express.json());
+
 app.get("/posts", getAllPostController);
 app.get("/posts/:id", getSinglePostController);
 app.post("/posts", createPostController);

@@ -4,9 +4,9 @@ import db from "../db";
 const getSinglePostController = async (req: Request, res: Response) => {
   const id = req.params.id;
   try {
-    const response = await db.getPost(id);
+    const { data } = await db.getPost(id);
     return res.status(200).json({
-      data: response,
+      data: { data },
     });
   } catch (error) {
     console.error(error);

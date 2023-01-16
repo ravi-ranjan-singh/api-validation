@@ -2,11 +2,11 @@ import { Request, Response } from "express";
 import db from "../db";
 
 const createPostController = async (req: Request, res: Response) => {
-  const data = req.body;
+  const postData = req.body;
   try {
-    const response = await db.createPost(data);
+    const { data } = await db.createPost(postData);
     return res.status(200).json({
-      data: response,
+      data,
     });
   } catch (error) {
     console.error(error);
