@@ -35,17 +35,17 @@ const createPostController = async (
   req: Request<{}, {}, RequestBody>,
   res: Response
 ) => {
-  const data = req.body;
-  const validationResult = validator(data);
+  const postData = req.body;
+  const validationResult = validator(postData);
   if (validationResult.error) {
     res.status(400).json({
       message: "missing required data",
     });
   }
   try {
-    const response = await db.createPost(data);
+    const { data } = await db.createPost(postData);
     return res.status(200).json({
-      data: response,
+      data,
     });
   } catch (error) {
     console.error(error);

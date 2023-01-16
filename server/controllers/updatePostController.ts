@@ -11,12 +11,12 @@ const updatePostController = async (
   req: Request<{ id: string }, {}, RequestBody>,
   res: Response
 ) => {
-  const data = req.body;
+  const postData = req.body;
   const id = req.params.id;
   try {
-    const response = await db.updatePost(id, data);
+    const { data } = await db.updatePost(id, postData);
     return res.status(200).json({
-      data: response,
+      data,
     });
   } catch (error) {
     console.error(error);

@@ -2,11 +2,10 @@ import { Request, Response } from "express";
 import db from "../db";
 
 const getAllPostController = async (req: Request, res: Response) => {
-  const id = req.params.id;
   try {
-    const response = await db.getAllPost();
+    const { data } = await db.getAllPost();
     return res.status(200).json({
-      data: response,
+      data,
     });
   } catch (error) {
     console.error(error);
