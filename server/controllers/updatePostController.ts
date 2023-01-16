@@ -1,7 +1,16 @@
 import { Request, Response } from "express";
 import db from "../db";
 
-const updatePostController = async (req: Request, res: Response) => {
+interface RequestBody {
+  title: string;
+  body: string;
+  userId: string;
+}
+
+const updatePostController = async (
+  req: Request<{ id: string }, {}, RequestBody>,
+  res: Response
+) => {
   const data = req.body;
   const id = req.params.id;
   try {
