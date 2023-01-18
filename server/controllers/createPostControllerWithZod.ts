@@ -15,14 +15,14 @@ function validatorWithZod(body: RequestBody) {
   return RequestSchema.safeParse(body);
 }
 
-const createPostController = async (
+const createPostControllerWithZod = async (
   req: Request<{}, {}, RequestBody>,
   res: Response
 ) => {
   const data = req.body;
   const validationResult = validatorWithZod(data);
   if (!validationResult.success)
-    res.status(400).json({
+    return res.status(400).json({
       errors: validationResult.error,
     });
 
@@ -39,4 +39,4 @@ const createPostController = async (
   }
 };
 
-export default createPostController;
+export default createPostControllerWithZod;

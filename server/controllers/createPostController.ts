@@ -8,20 +8,20 @@ interface RequestBody {
 }
 
 function validator(body: RequestBody) {
-  const isBodyEmpty = Object.keys(body).length > 0;
+  const isBodyEmpty = !(Object.keys(body).length > 0);
   if (isBodyEmpty)
     return {
       error: "Body is empty",
     };
-  if (!body.title.trim())
+  if (!body.title || body.title.trim().length === 0)
     return {
       error: "missing required data: title",
     };
-  if (!body.body.trim())
+  if (!body.body || body.body.trim().length === 0)
     return {
       error: "missing required data: body",
     };
-  if (!body.userId.trim())
+  if (!body.userId || body.userId.trim().length === 0)
     return {
       error: "missing required data: userId",
     };
@@ -38,8 +38,8 @@ const createPostController = async (
   const postData = req.body;
   const validationResult = validator(postData);
   if (validationResult.error) {
-    res.status(400).json({
-      message: "missing required data",
+    return res.status(400).json({
+      message: validationResult.error,
     });
   }
   try {
